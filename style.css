@@ -1,0 +1,414 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Courier New', Courier, monospace; 
+}
+
+body, html { 
+    width: 100%; 
+    height: 100%; 
+    background: #000000; 
+    color: #00ffcc; 
+    overflow: hidden; 
+}
+
+/* Efek Grid Latar Belakang */
+.bg-grid { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    background-image: linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px); 
+    background-size: 30px 30px; 
+    z-index: 0; 
+    pointer-events: none; 
+}
+
+.layer { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px; 
+    transition: opacity 1.5s ease; 
+    z-index: 2; 
+}
+
+.hidden { 
+    opacity: 0; 
+    pointer-events: none; 
+    position: absolute; 
+}
+
+/* FASE 1: RADIO */
+.radio-title { 
+    font-size: 1.1rem; 
+    text-align: center; 
+    margin-bottom: 30px; 
+    letter-spacing: 3px; 
+    animation: blink 1.5s infinite; 
+    color: #ff3333; 
+}
+
+.tuner-container { 
+    width: 300px; 
+    text-align: center; 
+}
+
+.freq-display { 
+    font-size: 3.5rem; 
+    font-weight: bold; 
+    margin-bottom: 20px; 
+    color: #00ffcc; 
+    text-shadow: 0 0 15px rgba(0, 255, 204, 0.6); 
+}
+
+input[type=range] { 
+    width: 100%; 
+    -webkit-appearance: none; 
+    background: #222; 
+    height: 4px; 
+    outline: none; 
+}
+
+input[type=range]::-webkit-slider-thumb { 
+    -webkit-appearance: none; 
+    width: 15px; 
+    height: 30px; 
+    background: #00ffcc; 
+    cursor: pointer; 
+    box-shadow: 0 0 10px #00ffcc; 
+    border-radius: 2px; 
+}
+
+/* FASE INTERLUDE: AUDIO FOUND */
+.signal-text { 
+    font-size: 1.5rem; 
+    letter-spacing: 5px; 
+    text-shadow: 0 0 10px #00ffcc; 
+    margin-bottom: 10px; 
+}
+
+/* FASE 2: THE VOID */
+#canvas-sand { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 1; 
+    pointer-events: none; 
+}
+
+.void-content { 
+    z-index: 3; 
+    text-align: center; 
+    max-width: 600px; 
+    width: 100%; 
+    background: rgba(0,0,0,0.7); 
+    padding: 35px 20px; 
+    border-radius: 8px; 
+    border: 1px solid rgba(0, 255, 204, 0.1); 
+}
+
+.transmission-header { 
+    color: #ff9900; 
+    font-size: 0.9rem; 
+    margin-bottom: 15px; 
+    letter-spacing: 2px; 
+    font-weight: bold; 
+}
+
+.question-text { 
+    font-size: 1.2rem; 
+    margin-bottom: 30px; 
+    line-height: 1.6; 
+    min-height: 70px; 
+    color: #fff; 
+}
+
+.input-box { 
+    width: 100%; 
+    background: transparent; 
+    border: none; 
+    border-bottom: 2px solid #222; 
+    color: #00ffcc; 
+    font-size: 1.2rem; 
+    padding: 10px; 
+    text-align: center; 
+    outline: none; 
+    transition: border-color 0.5s; 
+    font-weight: bold; 
+}
+
+.input-box:focus { 
+    border-color: #00ffcc; 
+    text-shadow: 0 0 5px #00ffcc; 
+}
+
+/* FASE 3: SURAT UTAMA */
+#letter-layer { 
+    background: #000000; 
+    overflow-y: auto; 
+    justify-content: flex-start; 
+    padding: 60px 20px; 
+}
+
+.letter-box { 
+    max-width: 650px; 
+    width: 100%; 
+    line-height: 1.9; 
+    font-size: 1.05rem; 
+    color: #d1d5db; 
+    text-align: justify; 
+}
+
+.warning-text { 
+    margin-top: 50px; 
+    color: #ff3333; 
+    font-size: 0.85rem; 
+    text-align: center; 
+    border: 1px dashed #ff3333; 
+    padding: 15px; 
+    background: rgba(255, 51, 51, 0.05); 
+}
+
+/* HANGUS */
+#burned-layer { 
+    background: #050505; 
+    color: #444; 
+    text-align: center; 
+}
+
+@keyframes blink { 
+    0%, 100% { opacity: 1; } 
+    50% { opacity: 0.3; } 
+}
+/* ==================== FASE 3: LAST GIFT SECTION ==================== */
+.last-gift-box {
+    margin-top: 50px;
+    border: 1px solid rgba(0,255,204,0.3);
+    padding: 30px 25px;
+    text-align: center;
+    background: rgba(0,255,204,0.03);
+    border-radius: 6px;
+}
+
+.last-gift-title {
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    color: #00ffcc;
+    margin-bottom: 12px;
+    animation: blink 2s infinite;
+}
+
+.last-gift-desc {
+    color: #aaa;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.photobooth-trigger-btn {
+    background: transparent;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    padding: 12px 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+.photobooth-trigger-btn:hover {
+    background: #00ffcc;
+    color: #000;
+    box-shadow: 0 0 20px rgba(0,255,204,0.5);
+}
+
+/* ==================== FASE 4: PHOTOBOOTH ==================== */
+#photobooth-layer {
+    background: #000;
+    overflow-y: auto;
+    justify-content: flex-start;
+    padding: 40px 20px 60px;
+    z-index: 10;
+}
+
+.photobooth-wrapper {
+    max-width: 560px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.photobooth-title {
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    color: #00ffcc;
+    margin-bottom: 6px;
+    text-shadow: 0 0 10px rgba(0,255,204,0.5);
+}
+
+.photobooth-sub {
+    color: #555;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+
+/* PHOTO STAGE */
+.photo-stage {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto 20px;
+    position: relative;
+}
+
+/* COUNTDOWN */
+.countdown-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.35);
+    border-radius: 4px;
+}
+
+.countdown-number {
+    font-size: 7rem;
+    font-weight: 900;
+    color: #00ffcc;
+    text-shadow: 0 0 30px #00ffcc, 0 0 60px #00ffcc;
+    animation: countPulse 1s ease-out;
+}
+
+@keyframes countPulse {
+    0% { transform: scale(1.4); opacity: 0.3; }
+    50% { transform: scale(1.0); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+/* FLASH */
+.flash-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 9;
+    background: #fff;
+    opacity: 0;
+    pointer-events: none;
+    border-radius: 4px;
+}
+
+.flash-overlay.flash-animate {
+    animation: flashAnim 0.5s ease-out forwards;
+}
+
+@keyframes flashAnim {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* PHOTO CONTROLS */
+.photo-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.pb-btn {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 10px 18px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    border: none;
+}
+
+.pb-primary {
+    background: #00ffcc;
+    color: #000;
+    font-weight: bold;
+}
+
+.pb-primary:hover { box-shadow: 0 0 15px rgba(0,255,204,0.6); }
+
+.pb-secondary {
+    background: transparent;
+    border: 1px solid #444;
+    color: #aaa;
+}
+
+.pb-secondary:hover { border-color: #00ffcc; color: #00ffcc; }
+
+/* DOWNLOAD */
+.download-controls {
+    margin-top: 5px;
+    padding: 20px;
+    border: 1px dashed rgba(0,255,204,0.25);
+    border-radius: 4px;
+}
+
+.download-label {
+    color: #888;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.download-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.pb-dl {
+    background: transparent;
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+    font-size: 0.8rem;
+    padding: 8px 16px;
+}
+
+.pb-dl:hover {
+    background: rgba(0,255,204,0.1);
+    box-shadow: 0 0 10px rgba(0,255,204,0.3);
+}
+
+.pb-status {
+    margin-top: 14px;
+    font-size: 0.8rem;
+    color: #555;
+    letter-spacing: 1px;
+    min-height: 20px;
+}
+
+/* Finish button */
+.pb-finish {
+    background: transparent;
+    border: 1px solid #ff3333;
+    color: #ff3333;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    padding: 8px 20px;
+    margin-top: 8px;
+}
+.pb-finish:hover {
+    background: rgba(255,51,51,0.1);
+    box-shadow: 0 0 10px rgba(255,51,51,0.3);
+}

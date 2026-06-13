@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Last Transmission</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+
+    <audio id="bgm" src="happy-bday.mp3" loop></audio>
+
+    <!-- LAYER HANGUS -->
+    <div id="burned-layer" class="layer hidden">
+        <h1 style="letter-spacing: 2px;">[ TRANSMISI TELAH HANGUS ]</h1>
+        <p style="margin-top: 20px; font-size: 0.9rem; color: #333;">Sinyal terputus. Quantum link tidak dapat diregenerasi.</p>
+    </div>
+
+    <!-- FASE 1: SILENT RADIO -->
+    <div id="radio-layer" class="layer">
+        <div class="radio-title">MENCARI DEKRIPSI SINYAL...</div>
+        <div class="tuner-container">
+            <div id="freq-val" class="freq-display">0.0</div>
+            <input type="range" id="tuner" min="0.0" max="100.0" step="0.1" value="0.0">
+            <p style="color: #444; font-size: 0.8rem; margin-top: 20px;">Petunjuk: Cari koordinatmu (DD.M)</p>
+        </div>
+    </div>
+
+    <!-- FASE INTERLUDE -->
+    <div id="interlude-layer" class="layer hidden">
+        <div class="signal-text" style="color: #00ffcc;">SINYAL TERKUNCI</div>
+        <div style="font-size: 0.9rem; color: #888; animation: blink 1s infinite;">Memperkuat transmisi audio... mohon tunggu</div>
+    </div>
+
+    <!-- FASE 2: THE VOID & PASIR RUNTUH -->
+    <div id="void-layer" class="layer hidden">
+        <canvas id="canvas-sand"></canvas>
+        <div class="void-content">
+            <div id="tx-header" class="transmission-header"></div>
+            <div id="question" class="question-text"></div>
+            <input type="text" id="answer-input" class="input-box" placeholder="Ketik jawaban di sini lalu Enter..." autocomplete="off">
+        </div>
+    </div>
+
+    <!-- FASE 3: SURAT UTAMA -->
+    <div id="letter-layer" class="layer hidden">
+        <div class="letter-box">
+            <h2 style="color: #00ffcc; margin-bottom: 25px; text-align: center; letter-spacing: 2px;">HAPPY 22nd BIRTHDAY, MY JAGOAN! 🎉</h2>
+            
+            <p>Hey. If you are reading this, it means you successfully tuned into the right frequency and survived the void. Kerennyoo bisa nebak angkanya, haha.</p>
+            <br>
+            <p>Sengaja aku bikin website ini bener-bener kosong dan cuma bermodalkan ketikan kamu aja: <i>just texts, but they meant the world.</i> Makasih banyak ya udah selalu jadi salah satu teman terbaik, tempat bahas hal-hal absurd, dan selalu seru diajak berbagi cerita dari dulu sampai sekarang.</p>
+            <br>
+            <p>I wish you all the best in life. Semoga di umur yang ke-22 ini, langkah kamu selalu dipermudah, semua target dan impian kamu tercapai, and please, stay awesome as always. Kamu hebat banget udah melangkah sejauh ini!</p>
+            <br>
+            <p>Kebetulan, semua jawaban yang kamu ketik di tumpukan pasir tadi udah aku kunci di dalam kapsul waktu digital. <strong>Tepat setahun dari sekarang, di ulang tahun kamu yang ke-23, semua jawaban itu bakal otomatis terkirim ke email yang kamu masukin tadi.</strong> <i>Consider it a message from your past self.</i></p>
+            <br>
+            <p>Happy birthday, my jagoan. Have a great year ahead! ✨</p>
+            
+            <div class="warning-text">
+                ⚠️ QUANTUM DESTRUCTION TRIGGERED: Begitu kamu menutup halaman ini, enkripsi pelacak akan mengunci sistem. Website ini TIDAK AKAN BISA DIBUKA LAGI untuk kedua kalinya. Thank you for listening to this last transmission.
+            </div>
+
+            <!-- HADIAH TERAKHIR -->
+            <div class="last-gift-box">
+                <div class="last-gift-title">✨ SATU HADIAH LAGI ✨</div>
+                <p class="last-gift-desc">Sebelum kamu pergi... aku punya satu hal lagi buat kamu.<br>Siapkan pose terbaikmu — ini momen yang nggak bisa diulang.</p>
+                <button id="open-photobooth-btn" class="photobooth-trigger-btn">📸 BUKA PHOTOBOOTH</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FASE 4: PHOTOBOOTH -->
+    <div id="photobooth-layer" class="layer hidden">
+        <div class="photobooth-wrapper">
+            <div class="photobooth-title">📸 BIRTHDAY PHOTOBOOTH</div>
+            <p class="photobooth-sub">Pose terbaikmu, diabadikan selamanya.</p>
+
+            <!-- Hidden video & export canvas -->
+            <video id="camera-feed" autoplay playsinline muted style="display:none;"></video>
+            <canvas id="export-canvas" style="display:none;"></canvas>
+
+            <!-- Live display canvas -->
+            <div class="photo-stage">
+                <div style="position:relative; display:inline-block; width:100%;">
+                    <canvas id="display-canvas" style="width:100%; display:block; border-radius:4px;"></canvas>
+                    <!-- Countdown overlay -->
+                    <div id="countdown-overlay" class="countdown-overlay hidden">
+                        <div id="countdown-number" class="countdown-number"></div>
+                    </div>
+                    <!-- Flash overlay -->
+                    <div id="flash-overlay" class="flash-overlay hidden"></div>
+                </div>
+            </div>
+
+            <!-- CONTROLS -->
+            <div id="camera-controls" class="photo-controls">
+                <button id="btn-take" class="pb-btn pb-primary">⏱ Foto (5 detik countdown)</button>
+                <button id="btn-retake" class="pb-btn pb-secondary" style="display:none;">🔄 Foto Ulang</button>
+                <label class="pb-btn pb-secondary" id="label-upload">
+                    📁 Upload Foto
+                    <input type="file" id="file-upload" accept="image/*" style="display:none;">
+                </label>
+            </div>
+
+            <!-- DOWNLOAD CONTROLS (muncul setelah foto) -->
+            <div id="download-controls" class="download-controls hidden">
+                <p class="download-label">💾 Simpan kenangan ini sebagai:</p>
+                <div class="download-btns">
+                    <button id="btn-dl-jpg" class="pb-btn pb-dl">⬇ JPG</button>
+                    <button id="btn-dl-png" class="pb-btn pb-dl">⬇ PNG</button>
+                    <button id="btn-dl-video" class="pb-btn pb-dl">🎬 Video (5 detik)</button>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top: 4px;">
+                <button id="btn-finish" class="pb-btn pb-finish" style="display:none;">✖ Akhiri Transmisi</button>
+            </div>
+
+            <!-- Status text -->
+            <div id="pb-status" class="pb-status"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
