@@ -177,10 +177,71 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 /* HANGUS */
-#burned-layer { 
-    background: #050505; 
-    color: #444; 
-    text-align: center; 
+.burned-wrapper {
+    font-family: 'Courier New', Courier, monospace;
+    color: #ff4757;
+    text-align: left;
+    max-width: 420px;
+    width: 90%;
+    padding: 28px 30px;
+    box-sizing: border-box;
+    background: #050505;
+    border: 1px dashed #2a2a2a;
+    border-radius: 4px;
+}
+
+.burned-title {
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #ff4757;
+    animation: blink 1s infinite;
+    margin-bottom: 14px;
+}
+
+.burned-log {
+    color: #888;
+    margin: 3px 0;
+    font-size: 11px;
+}
+
+.burned-dim {
+    color: #555;
+}
+
+.burned-divider {
+    border: 1px dashed #444;
+    margin: 14px 0;
+}
+
+.burned-hbd-block {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.burned-hbd {
+    color: #00ffcc;
+    margin: 3px 0;
+}
+
+.burned-message {
+    color: #eee;
+    line-height: 1.6;
+    font-size: 11px;
+    margin-bottom: 14px;
+}
+
+.burned-date {
+    color: #ffb86c;
+}
+
+.burned-final {
+    color: #ff4757;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
 }
 
 @keyframes blink { 
